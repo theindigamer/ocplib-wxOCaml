@@ -126,7 +126,10 @@ let   generate_method_stub_body oc cl p  out_nargs =
       let wxClass_equiv = find_cpp_equiv wxClass in
 
       if List.mem wxClass_equiv direct_return_types then
-        fprintf oc "  %s %s_c;\n" wxClass arg_name
+        if wxClass = "int32" || wxClass = "int64" then
+          fprintf oc "  %s_t %s_c;\n" wxClass arg_name
+        else
+          fprintf oc "  %s %s_c;\n" wxClass arg_name
       else
         fprintf oc "  %s* %s_c = new %s();\n" wxClass arg_name wxClass;
     | Out, _ -> assert false
@@ -216,7 +219,10 @@ let   generate_method_stub_body oc cl p  out_nargs =
       let wxClass_equiv = find_cpp_equiv wxClass in
 
       if List.mem wxClass_equiv direct_return_types then
-        fprintf oc "%s ret_c = " wxClass
+        if wxClass = "int32" || wxClass = "int64" then
+          fprintf oc "%s_t ret_c = " wxClass
+        else
+          fprintf oc "%s ret_c = " wxClass
       else begin
         fprintf oc "%s *ret_c = new %s();\n" wxClass wxClass;
         fprintf oc "  *ret_c = ";

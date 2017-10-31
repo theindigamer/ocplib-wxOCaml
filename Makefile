@@ -40,8 +40,15 @@ clean:
 	$(MAKE) -C wxWidgets_cpp clean
 	ocp-build clean
 
-distclean: clean ocp-distclean
+distclean: clean
+	rm -rf config/autom4te.cache config/config.status config/config.log
+	rm -f config.ocp config/Makefile
 	rm -f ocp-build.root*
+
+configure: config/configure.ac config/m4/*
+	cd config; \
+		aclocal -I m4; \
+		autoconf
 
 ML_CFG=wxConfig
 ML_SRC=wxWidgets_cpp
