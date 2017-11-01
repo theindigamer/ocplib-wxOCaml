@@ -6,9 +6,23 @@ wxOCaml is a library part of TypeRex, developed and maintained by OCamlPro.
 Documentation to install and use this tool is available on
 [http://www.typerex.org/ocplib-wxOCaml.html](http://www.typerex.org/ocplib-wxOCaml.html)
 
-=====================================================================
-Installation:
--------------
+**NOTE:** This fork is not being actively maintained. Actually, I have no clue
+what I am doing here.
+
+## Installation
+
+### Using OPAM
+
+The best way to install this package is using [OPAM](https://opam.ocaml.org/):
+
+```
+opam pin add wxOCaml https://github.com/theindigamer/ocplib-wxOCaml.git
+opam install wxOCaml
+```
+
+### Manual installation
+
+If you want to manually install the package instead, follow the steps given below.
 
 On Debian, the following packages should be installed first:
 
@@ -24,15 +38,23 @@ make
 make install
 ```
 
-Note that normally, examples in `samples/` are compiled as part of
-`make`, but to be sure it is correctly installed, you can do the
-following to build them again after installation:
+## Examples
+
+See the `examples/` directory.
+
+If you used installed using OPAM earlier, you might find it useful to separately
+clone this repository and run:
 
 ```
-cd samples
+./configure
+make
+```
+
+Normally, this should compile the examples, which you can play with in the
+`_obuild` subdirectory. If that doesn't work, try the following:
+
+```
+cd examples
 ocp-build init
 ocp-build
 ```
-
-All examples should then be available in the _obuild/ sub-directory.
-
